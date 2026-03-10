@@ -1,109 +1,106 @@
-![LangChain Academy](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/66e9eba1020525eea7873f96_LCA-big-green%20(2).svg)
+# LangChain, LangGraph & LangSmith Fundamentals
 
-## Introduction
-
-Welcome to LangChain Academy! 
-This is a growing set of modules focused on foundational concepts within the LangChain ecosystem. 
-Module 0 is basic setup and Modules 1 - 4 focus on LangGraph, progressively adding more advanced themes. 
-In each module folder, you'll see a set of notebooks. A LangChain Academy accompanies each notebook 
-to guide you through the topic. Each module also has a `studio` subdirectory, with a set of relevant 
-graphs that we will explore using the LangGraph API and Studio.
+A hands-on learning path covering LLM application development with LangChain, graph-based agent workflows with LangGraph, and evaluation/tracing with LangSmith.
 
 ## Setup
 
-### Python version
-
-To get the most out of this course, please ensure you're using Python 3.11 or later. 
-This version is required for optimal compatibility with LangGraph. If you're on an older version, 
-upgrading will ensure everything runs smoothly.
-```
-python3 --version
+```bash
+python3.12 -m venv lc-venv
+source lc-venv/bin/activate
+pip install -r requirements.txt
 ```
 
-### Clone repo
-```
-git clone https://github.com/langchain-ai/langchain-academy.git
-$ cd langchain-academy
-```
+You will need API keys for the LLM providers used throughout the notebooks (OpenAI, Anthropic, Google, Groq, etc.). Set them as environment variables or in a `.env` file.
 
-### Create an environment and install dependencies
-#### Mac/Linux/WSL
-```
-$ python3 -m venv lc-academy-env
-$ source lc-academy-env/bin/activate
-$ pip install -r requirements.txt
-```
-#### Windows Powershell
-```
-PS> python3 -m venv lc-academy-env
-PS> Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
-PS> lc-academy-env\scripts\activate
-PS> pip install -r requirements.txt
-```
+## Repository Structure
 
-### Running notebooks
-If you don't have Jupyter set up, follow installation instructions [here](https://jupyter.org/install).
-```
-$ jupyter notebook
-```
+### [`langchain-agents/`](langchain-agents/)
 
-### Setting up env variables
-Briefly going over how to set up environment variables. You can also 
-use a `.env` file with `python-dotenv` library.
-#### Mac/Linux/WSL
-```
-$ export API_ENV_VAR="your-api-key-here"
-```
-#### Windows Powershell
-```
-PS> $env:API_ENV_VAR = "your-api-key-here"
-```
+Nine progressive lessons on building agents with LangChain:
 
-### Set OpenAI API key
-* If you don't have an OpenAI API key, you can sign up [here](https://openai.com/index/openai-api/).
-*  Set `OPENAI_API_KEY` in your environment 
+| Lesson | Topic |
+|--------|-------|
+| L1 | Fast agent setup |
+| L2 | Message handling |
+| L3 | Streaming responses |
+| L4 | Tool integration |
+| L5 | Tools with MCP |
+| L6 | Conversation memory |
+| L7 | Structured output |
+| L8 | Dynamic agent behavior |
+| L9 | Human-in-the-Loop |
 
-### Sign up and Set LangSmith API
-* Sign up for LangSmith [here](https://smith.langchain.com/), find out more about LangSmith
-* and how to use it within your workflow [here](https://www.langchain.com/langsmith), and relevant library [docs](https://docs.smith.langchain.com/)!
-*  Set `LANGSMITH_API_KEY`, `LANGSMITH_TRACING_V2=true` `LANGSMITH_PROJECT="langchain-academy"`in your environment 
+### [`langchain-foundations/`](langchain-foundations/)
 
-### Set up Tavily API for web search
+**Module 1 — Foundational Concepts**
+- Model initialization, invocation, and provider comparison (GPT, Claude, Gemini)
+- Prompt engineering techniques
+- Tool use and web search
+- Conversation memory
+- Multimodal messages (images, audio)
+- Capstone: Personal Chef agent
 
-* Tavily Search API is a search engine optimized for LLMs and RAG, aimed at efficient, 
-quick, and persistent search results. 
-* You can sign up for an API key [here](https://tavily.com/). 
-It's easy to sign up and offers a very generous free tier. Some lessons (in Module 4) will use Tavily. 
+**Module 2 — Multi-Agent Systems & RAG**
+- Model Context Protocol (MCP) server integration
+- Runtime context and state management
+- Multi-agent coordination
+- Capstone: Wedding Planner multi-agent system
+- Bonus: Retrieval-Augmented Generation (RAG) and SQL agents
 
-* Set `TAVILY_API_KEY` in your environment.
+**Module 3 — Advanced Patterns**
+- Message trimming, filtering, and optimization
+- Human-in-the-Loop approval workflows
+- Dynamic models, prompts, and tools at runtime
+- Capstone: Email agent with Chat UI
 
-### Set up LangGraph Studio
+### [`langgraph-foundations/`](langgraph-foundations/)
 
-* LangGraph Studio is a custom IDE for viewing and testing agents.
-* Studio can be run locally and opened in your browser on Mac, Windows, and Linux.
-* See documentation [here](https://langchain-ai.github.io/langgraph/concepts/langgraph_studio/#local-development-server) on the local Studio development server and [here](https://langchain-ai.github.io/langgraph/cloud/how-tos/studio/quick_start/#local-development-server). 
-* Graphs for LangGraph Studio are in the `module-x/studio/` folders.
-* To start the local development server, run the following command in your terminal in the `/studio` directory each module:
+**Module 0 — LangGraph Basics**
+- Nodes, edges, conditional routing
+- Memory and interrupts
+- Email agent example
 
-```
-langgraph dev
-```
+**Module 1 — Building Agents**
+- ReAct pattern (Act → Observe → Reason)
+- Chains, routers, and simple graphs
+- Agent memory and deployment
 
-You should see the following output:
-```
-- 🚀 API: http://127.0.0.1:2024
-- 🎨 Studio UI: https://smith.langchain.com/studio/?baseUrl=http://127.0.0.1:2024
-- 📚 API Docs: http://127.0.0.1:2024/docs
-```
+**Module 2 — State Management**
+- State schemas and TypedDict definitions
+- Reducers for state updates
+- External memory, summarization, and message trimming
+- Multiple state schemas
 
-Open your browser and navigate to the Studio UI: `https://smith.langchain.com/studio/?baseUrl=http://127.0.0.1:2024`.
+**Module 3 — Human-in-the-Loop**
+- Breakpoints for pausing/resuming execution
+- Editing state with human feedback
+- Dynamic (conditional) breakpoints
 
-* To use Studio, you will need to create a .env file with the relevant API keys
-* Run this from the command line to create these files for module 1 to 5, as an example:
-```
-for i in {1..5}; do
-  cp module-$i/studio/.env.example module-$i/studio/.env
-  echo "OPENAI_API_KEY=\"$OPENAI_API_KEY\"" > module-$i/studio/.env
-done
-echo "TAVILY_API_KEY=\"$TAVILY_API_KEY\"" >> module-4/studio/.env
-```
+**Module 4 — Advanced Patterns**
+- Map-reduce for parallel processing
+
+### [`langsmith/`](langsmith/)
+
+LangSmith tracing and evaluation:
+- Prompt optimization with ELI5 examples
+- Experiment tracking and evaluation datasets
+- Full explain-bot example with LangGraph Studio config
+
+### [`langsmith-cookbook/`](langsmith-cookbook/)
+
+**1 — Introduction**: Getting started with LangSmith tracing and evaluation.
+
+**2 — Optimization**: Assisted prompt engineering, few-shot bootstrapping, systematic optimization workflows, fine-tuning on chat runs, and Lilac data exploration.
+
+## Key Dependencies
+
+| Package | Purpose |
+|---------|---------|
+| `langchain` / `langchain-core` | LLM framework |
+| `langgraph` / `langgraph-prebuilt` | Graph-based agent workflows |
+| `langsmith` | Tracing and evaluation |
+| `langchain-openai`, `-groq`, `-ollama`, `-huggingface` | LLM providers |
+| `langchain-mcp-adapters` | Model Context Protocol |
+| `tavily-python`, `wikipedia`, `arxiv` | Search and knowledge tools |
+| `chromadb` | Vector database (RAG) |
+| `pypdf` | PDF processing |
